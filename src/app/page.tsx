@@ -5,6 +5,7 @@ import { Icon, WhatsAppIcon, type IconName } from "@/components/Icon";
 import { RevealObserver } from "@/components/Reveal";
 import { Tilt } from "@/components/Tilt";
 import { RedesSociales } from "@/components/RedesSociales";
+import { SITIO } from "@/lib/sitio";
 import {
   CORREO_COMERCIAL,
   WHATSAPP_NUMERO,
@@ -89,6 +90,52 @@ const CINTA = [
   "Material comercial",
 ];
 
+const JSON_LD = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "ProfessionalService",
+      "@id": `${SITIO.url}/#organizacion`,
+      name: SITIO.nombre,
+      slogan: "Ideas que venden.",
+      description: SITIO.descripcion,
+      url: SITIO.url,
+      logo: `${SITIO.url}/img/icon-512.jpg`,
+      image: `${SITIO.url}/opengraph-image`,
+      email: CORREO_COMERCIAL,
+      telephone: `+${WHATSAPP_NUMERO}`,
+      priceRange: "$$",
+      address: { "@type": "PostalAddress", addressCountry: "CO" },
+      areaServed: { "@type": "Country", name: "Colombia" },
+      knowsLanguage: "es",
+      contactPoint: {
+        "@type": "ContactPoint",
+        contactType: "sales",
+        email: CORREO_COMERCIAL,
+        telephone: `+${WHATSAPP_NUMERO}`,
+        areaServed: "CO",
+        availableLanguage: "es",
+      },
+      hasOfferCatalog: {
+        "@type": "OfferCatalog",
+        name: "Servicios de VentixB2B",
+        itemListElement: SERVICIOS.map((s) => ({
+          "@type": "Offer",
+          itemOffered: { "@type": "Service", name: s.titulo, description: s.texto },
+        })),
+      },
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${SITIO.url}/#sitio`,
+      url: SITIO.url,
+      name: SITIO.nombre,
+      inLanguage: "es-CO",
+      publisher: { "@id": `${SITIO.url}/#organizacion` },
+    },
+  ],
+};
+
 /** Retraso escalonado para animaciones (en ms). */
 const d = (ms: number) => ({ "--d": `${ms}ms` }) as React.CSSProperties;
 
@@ -151,6 +198,10 @@ function FormasFlotantes() {
 export default function Home() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(JSON_LD).replace(/</g, "\\u003c") }}
+      />
       <RevealObserver />
       <Header />
       <main id="inicio" className="flex-1">
@@ -188,6 +239,9 @@ export default function Home() {
 
           <div className="relative mx-auto max-w-7xl px-4 pb-16 pt-10 sm:px-6 lg:grid lg:grid-cols-2 lg:items-center lg:gap-10 xl:block xl:min-h-[660px] xl:py-24">
             <div className="max-w-xl">
+              <p className="hero-in mb-5" style={d(0)}>
+                <Etiqueta>Agencia de marketing digital y branding</Etiqueta>
+              </p>
               <h1 className="text-5xl font-extrabold leading-[0.92] tracking-tight text-navy-900 sm:text-6xl xl:text-7xl">
                 <span className="hero-in block" style={d(0)}>Impulsamos</span>
                 <span className="hero-in block" style={d(120)}>marcas.</span>
@@ -318,7 +372,7 @@ export default function Home() {
                       <div className="absolute inset-0 overflow-hidden rounded-t-2xl">
                         <Image
                           src={`/img/${s.img}.jpg`}
-                          alt=""
+                          alt={`${s.titulo} - VentixB2B`}
                           fill
                           sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
                           className="object-cover transition duration-700 ease-out group-hover:scale-110"

@@ -1,0 +1,31 @@
+/** Datos del sitio para SEO. Cambia NEXT_PUBLIC_SITE_URL si el dominio final es otro. */
+export const SITIO = {
+  url: (process.env.NEXT_PUBLIC_SITE_URL || "https://ventixb2b.com").replace(/\/$/, ""),
+  nombre: "VentixB2B",
+  eslogan: "Ideas que venden",
+  titulo: "VentixB2B | Agencia de marketing digital, branding y diseño web en Colombia",
+  descripcion:
+    "Impulsamos marcas y aceleramos negocios con branding, publicidad digital, gestión de redes sociales, diseño web y e-commerce, fachadas comerciales y eventos. Estrategia, creatividad y tecnología para que tu negocio crezca.",
+  palabrasClave: [
+    "agencia de marketing digital",
+    "agencia de publicidad Colombia",
+    "branding",
+    "identidad corporativa",
+    "diseño de logotipos",
+    "marketing digital",
+    "publicidad en Google",
+    "publicidad en redes sociales",
+    "gestión de redes sociales",
+    "community manager",
+    "diseño gráfico",
+    "diseño web",
+    "desarrollo de páginas web",
+    "tiendas virtuales",
+    "e-commerce",
+    "fachadas comerciales",
+    "marketing experiencial",
+    "eventos y activaciones de marca",
+    "automatización e inteligencia artificial",
+    "VentixB2B",
+  ],
+};
